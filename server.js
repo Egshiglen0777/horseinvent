@@ -1,24 +1,21 @@
-import express from "express";
-import path from "path";
-import { fileURLToPath } from "url";
-import horseRouter from "./horse.js";
+const express = require("express");
+const path = require("path");
+const bodyParser = require("body-parser");
+const horseRouter = require("./horse.js");
 
 const app = express();
-app.use(express.json());
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// serve static files
+app.use(bodyParser.json());
 app.use(express.static(__dirname));
 
-// API route
+// ✅ API route (connects to horse.js)
 app.use("/api", horseRouter);
 
-// fallback to index.html
-app.get("*", (req, res) => {
+// ✅ Default route (serves index.html)
+app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
+// ✅ Start server
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log(`🐴 HorseInvent running on port ${PORT}`));

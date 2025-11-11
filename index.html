@@ -7,18 +7,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
   <style>
     body {
-      background: radial-gradient(circle at top, #111, #000);
-      color: #fff;
-      font-family: 'Bungee', cursive;
-      text-align: center;
       margin: 0;
-      min-height: 100vh;
+      background: url('https://raw.githubusercontent.com/Egshiglen0777/horseinvent/main/hqdefault.jpg') center/cover no-repeat fixed;
+      font-family: 'Bungee', cursive;
+      color: #fff;
+      text-align: center;
     }
 
     nav {
-      background: #151515;
+      background: rgba(0, 0, 0, 0.6);
       padding: 15px 0;
-      box-shadow: 0 4px 10px rgba(255, 255, 255, 0.05);
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
     }
 
     nav a {
@@ -36,21 +35,27 @@
     h1 {
       font-size: 2.8rem;
       color: #FFD700;
-      margin-top: 40px;
       text-shadow: 0 0 15px #FFD700;
+      margin-top: 40px;
+    }
+
+    h3 {
+      color: #FFD700;
+      text-shadow: 0 0 10px #FFD700;
     }
 
     #chatBox {
       width: 80%;
       max-width: 600px;
-      margin: 0 auto;
-      background: rgba(255,255,255,0.05);
-      border-radius: 12px;
+      margin: 40px auto;
       padding: 20px;
-      box-shadow: 0 0 25px rgba(255,255,255,0.08);
-      text-align: left;
-      overflow-y: auto;
+      border-radius: 15px;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(8px);
       height: 400px;
+      overflow-y: auto;
+      text-align: left;
+      box-shadow: 0 0 25px rgba(0,0,0,0.4);
     }
 
     .horse {
@@ -66,12 +71,12 @@
     input {
       width: 70%;
       padding: 10px;
-      border-radius: 8px;
       border: none;
-      margin-top: 15px;
-      background: #222;
-      color: #fff;
+      border-bottom: 2px solid #FFD700;
+      background: transparent;
+      color: white;
       font-family: 'Bungee', cursive;
+      outline: none;
     }
 
     button {
@@ -82,7 +87,6 @@
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      font-weight: bold;
       transition: 0.3s;
       font-family: 'Bungee', cursive;
     }
@@ -91,10 +95,35 @@
       background: #ffea70;
     }
 
+    .links {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .links a {
+      color: #FFD700;
+      text-decoration: none;
+      margin: 0 15px;
+      transition: 0.3s;
+    }
+
+    .links a:hover {
+      color: white;
+    }
+
+    .ca {
+      margin-top: 20px;
+      font-size: 1rem;
+      cursor: pointer;
+      color: #FFD700;
+    }
+
     footer {
       margin-top: 40px;
-      color: #666;
-      font-size: 0.9rem;
+      color: #ddd;
+      font-size: 0.8rem;
+      background: rgba(0,0,0,0.6);
+      padding: 10px 0;
     }
   </style>
 </head>
@@ -114,8 +143,15 @@
     <button onclick="sendMessage()">Send</button>
   </section>
 
+  <div class="links">
+    <a href="https://x.com/i/communities/1986269796942684308" target="_blank">🐦 X Community</a> |
+    <a href="https://dexscreener.com/solana/aunwse6wj6goanxka1gdgdwzjpdfxburqigrfntqhuhc" target="_blank">📊 DexScreener</a> |
+    <a href="https://pump.fun/coin/E5UdugdLvgsccqe3pdq1ivNBTZhaxwthjvnE85Kzpump" target="_blank">💥 Pump.fun</a>
+    <div class="ca" onclick="copyCA()">📋 CA: E5UdugdLvgsccqe3pdq1ivNBTZhaxwthjvnE85Kzpump</div>
+  </div>
+
   <footer>
-    <p>Built by the degens, for the degens 🐴</p>
+    Built by the degens, for the degens 🐴💨
   </footer>
 
   <script>
@@ -137,7 +173,7 @@
       appendMessage('user', userText);
       input.value = '';
 
-      appendMessage('horse', 'Typing... 🐴');
+      appendMessage('horse', 'Typing... 🐴💨');
 
       try {
         const response = await fetch('/api/chat', {
@@ -147,16 +183,21 @@
         });
         const data = await response.json();
         chatBox.lastChild.remove();
-        appendMessage('horse', data.reply || "Neigh... Horse’s vent might be clogged. 💨");
+        appendMessage('horse', data.reply || "Bruh, Horse fell deeper in the vent 💀");
       } catch (err) {
         chatBox.lastChild.remove();
-        appendMessage('horse', "Bruh, Horse fell through the vent. Try again later 💀");
+        appendMessage('horse', "Network rug. Try again later 🧱🐴");
       }
     }
 
     input.addEventListener('keypress', e => {
       if (e.key === 'Enter') sendMessage();
     });
+
+    function copyCA() {
+      navigator.clipboard.writeText('E5UdugdLvgsccqe3pdq1ivNBTZhaxwthjvnE85Kzpump');
+      alert('Copied Contract Address ✅');
+    }
   </script>
 </body>
 </html>

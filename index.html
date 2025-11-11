@@ -1,159 +1,225 @@
-<style>
-  /* 🐴 Background setup */
-  body {
-    margin: 0;
-    font-family: 'Bungee', cursive;
-    color: #fff;
-    overflow-x: hidden;
-    background: url('https://raw.githubusercontent.com/Egshiglen0777/horseinvent/main/hqdefault.jpg') center center / cover no-repeat fixed;
-    position: relative;
-  }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🐴 Horse in an Air Vent — $HORSE</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet" />
 
-  /* ✨ Soft overlay for contrast — way lighter now */
-  body::before {
-    content: "";
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.35); /* ⬅️ reduced opacity from 0.7 to 0.35 */
-    z-index: 0;
-  }
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Bungee', cursive;
+      color: #fff;
+      overflow-x: hidden;
+      background: url('https://raw.githubusercontent.com/Egshiglen0777/horseinvent/main/hqdefault.jpg') center center / cover no-repeat fixed;
+      position: relative;
+    }
 
-  * {
-    position: relative;
-    z-index: 1;
-  }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.35);
+      z-index: 0;
+    }
 
-  nav {
-    background: rgba(0, 0, 0, 0.6);
-    padding: 15px 0;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
-  }
+    * { position: relative; z-index: 1; }
 
-  nav a {
-    color: #fff;
-    margin: 5px 15px;
-    text-decoration: none;
-    font-size: 18px;
-    transition: 0.3s;
-  }
+    nav {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 15px 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
 
-  nav a:hover {
-    color: #FFD700;
-  }
+    nav a {
+      color: #fff;
+      margin: 5px 15px;
+      text-decoration: none;
+      font-size: 18px;
+      transition: 0.3s;
+    }
 
-  h1 {
-    font-size: 2.5rem;
-    color: #FFD700;
-    text-shadow: 0 0 15px #FFD700;
-    margin-top: 40px;
-    text-align: center;
-  }
+    nav a:hover { color: #FFD700; }
 
-  h3 {
-    color: #FFD700;
-    text-shadow: 0 0 10px #FFD700;
-    margin-bottom: 10px;
-  }
+    h1 {
+      font-size: 2.5rem;
+      color: #FFD700;
+      text-shadow: 0 0 15px #FFD700;
+      margin-top: 40px;
+      text-align: center;
+    }
 
-  #chatBox {
-    width: 90%;
-    max-width: 600px;
-    margin: 30px auto;
-    padding: 15px;
-    border-radius: 15px;
-    background: rgba(0, 0, 0, 0.3); /* more transparent */
-    backdrop-filter: blur(6px);
-    height: 400px;
-    overflow-y: auto;
-    text-align: left;
-    box-shadow: 0 0 25px rgba(0,0,0,0.3);
-  }
+    h3 {
+      color: #FFD700;
+      text-shadow: 0 0 10px #FFD700;
+      margin-bottom: 10px;
+    }
 
-  .horse {
-    color: #FFD700;
-    margin-bottom: 8px;
-  }
+    #chatBox {
+      width: 90%;
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 15px;
+      border-radius: 15px;
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(6px);
+      height: 400px;
+      overflow-y: auto;
+      text-align: left;
+      box-shadow: 0 0 25px rgba(0,0,0,0.3);
+    }
 
-  .user {
-    color: #00BFFF;
-    margin-bottom: 8px;
-  }
+    .horse { color: #FFD700; margin-bottom: 8px; }
+    .user { color: #00BFFF; margin-bottom: 8px; }
 
-  #userInput {
-    width: 65%;
-    padding: 10px;
-    border: none;
-    border-bottom: 2px solid #FFD700;
-    background: transparent;
-    color: white;
-    font-family: 'Bungee', cursive;
-    outline: none;
-  }
+    #userInput {
+      width: 65%;
+      padding: 10px;
+      border: none;
+      border-bottom: 2px solid #FFD700;
+      background: transparent;
+      color: white;
+      font-family: 'Bungee', cursive;
+      outline: none;
+    }
 
-  button {
-    padding: 10px 18px;
-    margin-left: 10px;
-    background: #FFD700;
-    color: #111;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.3s;
-    font-family: 'Bungee', cursive;
-  }
+    button {
+      padding: 10px 18px;
+      margin-left: 10px;
+      background: #FFD700;
+      color: #111;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-family: 'Bungee', cursive;
+    }
 
-  button:hover {
-    background: #ffea70;
-  }
+    button:hover { background: #ffea70; }
 
-  .links {
-    margin-top: 40px;
-    text-align: center;
-  }
+    .links {
+      margin-top: 40px;
+      text-align: center;
+    }
 
-  .links a {
-    color: #FFD700;
-    text-decoration: none;
-    margin: 0 10px;
-    display: inline-block;
-    transition: 0.3s;
-  }
+    .links a {
+      color: #FFD700;
+      text-decoration: none;
+      margin: 0 10px;
+      display: inline-block;
+      transition: 0.3s;
+    }
 
-  .links a:hover {
-    color: white;
-  }
+    .links a:hover { color: white; }
 
-  .ca {
-    margin-top: 20px;
-    font-size: 1rem;
-    cursor: pointer;
-    color: #FFD700;
-    word-break: break-all;
-  }
+    .ca {
+      margin-top: 20px;
+      font-size: 1rem;
+      cursor: pointer;
+      color: #FFD700;
+      word-break: break-all;
+    }
 
-  footer {
-    margin-top: 40px;
-    color: #ddd;
-    font-size: 0.8rem;
-    background: rgba(0,0,0,0.5);
-    padding: 10px 0;
-  }
+    footer {
+      margin-top: 40px;
+      color: #ddd;
+      font-size: 0.8rem;
+      background: rgba(0,0,0,0.5);
+      padding: 10px 0;
+      text-align: center;
+    }
 
-  /* 📱 Mobile */
-  @media (max-width: 768px) {
-    h1 { font-size: 2rem; }
-    #chatBox { height: 320px; }
-    #userInput { width: 55%; font-size: 0.9rem; }
-    button { padding: 8px 14px; font-size: 0.9rem; }
-  }
+    /* 📱 Mobile */
+    @media (max-width: 768px) {
+      h1 { font-size: 2rem; }
+      #chatBox { height: 320px; }
+      #userInput { width: 55%; font-size: 0.9rem; }
+      button { padding: 8px 14px; font-size: 0.9rem; }
+    }
 
-  @media (max-width: 480px) {
-    #chatBox { height: 250px; }
-    #userInput { width: 70%; font-size: 0.8rem; }
-    button { padding: 6px 12px; font-size: 0.8rem; }
-  }
-</style>
+    @media (max-width: 480px) {
+      #chatBox { height: 250px; }
+      #userInput { width: 70%; font-size: 0.8rem; }
+      button { padding: 6px 12px; font-size: 0.8rem; }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <a href="#">🐴 Vent AI</a>
+    <a href="#">🎨 Meme Generator (Coming Soon)</a>
+  </nav>
+
+  <h1>🐴 Horse in an Air Vent</h1>
+  <h3 style="text-align:center;">$HORSE</h3>
+
+  <div id="chatBox">
+    <div class="horse">HORSE: Still in the vent, hooman. Try askin’ somethin’ juicier 🐴💨</div>
+  </div>
+
+  <div style="text-align:center;">
+    <input id="userInput" placeholder="Say something to Horse... (press Enter)" />
+    <button id="sendBtn">SEND</button>
+  </div>
+
+  <div class="links">
+    <a href="https://x.com/i/communities/1986269796942684308" target="_blank">🐦 X Community</a>
+    <a href="https://dexscreener.com/solana/aunwse6wj6goanxka1gdgdwzjpdfxburqigrfntqhuhc" target="_blank">📊 Dexscreener</a>
+    <a href="https://pump.fun/coin/E5UdugdLvgsccqe3pdq1ivNBTZhaxwthjvnE85Kzpump" target="_blank">💰 Pump.fun</a>
+    <div class="ca" onclick="copyCA()">📋 Copy Contract: E5UdugdLvgsccqe3pdq1ivNBTZhaxwthjvnE85Kzpump</div>
+  </div>
+
+  <footer>Built by the degens, for the degens 🐴</footer>
+
+  <script>
+    const chatBox = document.getElementById("chatBox");
+    const input = document.getElementById("userInput");
+    const sendBtn = document.getElementById("sendBtn");
+
+    // 🧠 Local AI behavior (mocked)
+    function generateHorseReply(message) {
+      const replies = [
+        "Still in the vent, hooman. Try askin’ somethin’ juicier 🐴💨",
+        "Buy $HORSE or get left in the barn 🚀",
+        "Neigh means hodl, remember that 💎🐴",
+        "You talkin’ to the most based horse on Solana 🌞",
+        "I’m stuck in the vent but my bags aren’t 🤑",
+        "CA’s copied? Good. Now ride with me to Valhalla 🐎🔥"
+      ];
+      return replies[Math.floor(Math.random() * replies.length)];
+    }
+
+    function appendMessage(sender, message) {
+      const msg = document.createElement("div");
+      msg.className = sender;
+      msg.textContent = `${sender.toUpperCase()}: ${message}`;
+      chatBox.appendChild(msg);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function sendMessage() {
+      const userMsg = input.value.trim();
+      if (!userMsg) return;
+      appendMessage("user", userMsg);
+      input.value = "";
+      setTimeout(() => appendMessage("horse", generateHorseReply(userMsg)), 800);
+    }
+
+    sendBtn.addEventListener("click", sendMessage);
+    input.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") sendMessage();
+    });
+
+    function copyCA() {
+      navigator.clipboard.writeText("E5UdugdLvgsccqe3pdq1ivNBTZhaxwthjvnE85Kzpump");
+      alert("Contract copied to clipboard 🐴");
+    }
+  </script>
+</body>
+</html>

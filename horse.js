@@ -1,39 +1,28 @@
-const chatBox = document.getElementById('chatBox');
-const input = document.getElementById('userInput');
+const express = require("express");
+const router = express.Router();
 
-function appendMessage(sender, text) {
-  const msg = document.createElement('div');
-  msg.classList.add(sender);
-  msg.innerHTML = `<b>${sender === 'vent' ? 'Vent' : 'You'}:</b> ${text}`;
-  chatBox.appendChild(msg);
-  chatBox.scrollTop = chatBox.scrollHeight;
-}
+// Mock OpenAI-like responses (funny + meme-tic)
+router.post("/chat", (req, res) => {
+  const { message } = req.body;
+  let reply = "Neigh... I'm still in the vent, hooman.";
 
-async function sendMessage() {
-  const userText = input.value.trim();
-  if (!userText) return;
+  const lower = message.toLowerCase();
 
-  appendMessage('user', userText);
-  input.value = '';
-
-  appendMessage('vent', 'Typing... 🐴');
-
-  try {
-    const response = await fetch('/api/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: userText })
-    });
-    const data = await response.json();
-    chatBox.lastChild.remove();
-    appendMessage('vent', data.reply || "Neigh... I think my vent’s clogged. 🐴💨");
-  } catch (err) {
-    chatBox.lastChild.remove();
-    appendMessage('vent', "Bruh, even vents have downtime. Try again. 💀");
+  if (lower.includes("hello") || lower.includes("hi")) {
+    reply = "Hey there, hooman! 🐴💨 Still in the vent, but vibing. What’s good?";
+  } else if (lower.includes("word")) {
+    reply = "Today's word of the vent is: *neigh-sayers*. Those who doubt your pump. Ignore ‘em and gallop to greatness, champ. 🏆🐴";
+  } else if (lower.includes("price") || lower.includes("$horse")) {
+    reply = "📈 $HORSE? Oh, we’re trotting to the moon, neigh doubt about it!";
+  } else if (lower.includes("who are you")) {
+    reply = "I’m Vent — a horse stuck in an air vent, powered by memes and caffeine. 🧠";
+  } else if (lower.includes("advice")) {
+    reply = "Always DYOR, avoid rugs, and never short the memes. 💀🐴";
+  } else {
+    reply = "Bro, that’s above my horse-grade. I’m still in vent... maybe ask again? 🫠";
   }
-}
 
-// ✅ Press Enter to send
-input.addEventListener('keypress', function(e) {
-  if (e.key === 'Enter') sendMessage();
+  res.json({ reply });
 });
+
+module.exports = router;

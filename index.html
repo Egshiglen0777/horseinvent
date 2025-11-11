@@ -178,48 +178,112 @@
   <footer>Built by the degens, for the degens 🐴</footer>
 
   <script>
-    const chatBox = document.getElementById("chatBox");
-    const input = document.getElementById("userInput");
-    const sendBtn = document.getElementById("sendBtn");
+   
+  const chatBox = document.getElementById("chatBox");
+  const input = document.getElementById("userInput");
+  const sendBtn = document.getElementById("sendBtn");
 
-    // 🧠 Local AI behavior (mocked)
-    function generateHorseReply(message) {
-      const replies = [
-        "Still in the vent, hooman. Try askin’ somethin’ juicier 🐴💨",
-        "Buy $HORSE or get left in the barn 🚀",
-        "Neigh means hodl, remember that 💎🐴",
-        "You talkin’ to the most based horse on Solana 🌞",
-        "I’m stuck in the vent but my bags aren’t 🤑",
-        "CA’s copied? Good. Now ride with me to Valhalla 🐎🔥"
+  function appendMessage(sender, message) {
+    const msg = document.createElement("div");
+    msg.className = sender;
+    msg.textContent = `${sender.toUpperCase()}: ${message}`;
+    chatBox.appendChild(msg);
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }
+
+  // 🧠 Horse Personality v2.0
+  function generateHorseReply(message) {
+    message = message.toLowerCase();
+
+    // Keyword reactions
+    if (message.includes("ca") || message.includes("contract")) {
+      return "CA’s copied? Good. Now ride with me to Valhalla 🐎🔥\nE5UdugdLvgsccqe3pdq1ivNBTZhaxwthjvnE85Kzpump";
+    }
+    if (message.includes("buy") || message.includes("pump")) {
+      return "BUY $HORSE OR GET LEFT IN THE BARN 🚀🐴";
+    }
+    if (message.includes("dex") || message.includes("chart")) {
+      return "Charts? 🧐 Check the DEX, hooman 👉 https://dexscreener.com/solana/aunwse6wj6goanxka1gdgdwzjpdfxburqigrfntqhuhc";
+    }
+    if (message.includes("x") || message.includes("twitter")) {
+      return "Follow the herd 🐴 — we gallop loud on X: https://x.com/i/communities/1986269796942684308";
+    }
+    if (message.includes("vent") || message.includes("where")) {
+      return "Still in the vent, hooman. It’s humid. Send snacks. 🍞💨";
+    }
+    if (message.includes("hodl") || message.includes("hold")) {
+      return "HODL like a stallion 🐎💎 never neigh at the dip!";
+    }
+    if (message.includes("hello") || message.includes("hi")) {
+      return "Neigh there, hooman. You finally found me in the vent, huh? 🐴💨";
+    }
+    if (message.includes("token") || message.includes("project")) {
+      return "$HORSE ain’t just a token, it’s a lifestyle, a stablecoin of chaos 🏇💰";
+    }
+    if (message.includes("help") || message.includes("what")) {
+      return "Help? Bro, I’m a horse stuck in a vent, not your therapist 💀🐴";
+    }
+    if (message.includes("who") || message.includes("you")) {
+      return "I’m the $HORSE. Born in a meme, raised in a vent, destined for Valhalla 🐎⚡️";
+    }
+    if (message.includes("price") || message.includes("moon")) {
+      return "Moon? Nah bro, we gallop past it 🌕💨";
+    }
+    if (message.includes("dev") || message.includes("owner")) {
+      return "The dev? Oh, that guy just opened the vent and dipped 😭";
+    }
+
+    // Random chaos replies (fallback)
+    const replies = [
+      "Still in the vent, hooman. Try askin’ somethin’ juicier 🐴💨",
+      "You talkin’ to the most based horse on Solana 🌞",
+      "Neigh means hodl, remember that 💎🐴",
+      "Stop typing, it’s getting hotter in here 😩🔥",
+      "Buy the dip, neigh at the top 🐎📈",
+      "I’m stuck in the vent but my bags aren’t 🤑",
+      "Imagine shorting a horse token 🤡",
+      "Bro, do you even gallop? 🐴💨",
+      "You smell like a rugpull 💀",
+      "CA’s in bio, brain’s in the vent 😵‍💫",
+      "One neigh closer to greatness 🏆🐎",
+      "Sorry, can’t hear you over my bullish neighs 📢",
+      "I’m not a chatbot, I’m a horse with WiFi 🐴📶"
+    ];
+
+    // 10% chance of special chaos line
+    if (Math.random() < 0.1) {
+      const chaos = [
+        "Still bullish, still vented. The prophecy continues 🐴📜",
+        "I just ate a meme coin, now I’m feeling pumped 🤠",
+        "Devs left me in here to generate alpha 😤",
+        "I told Elon once… he neighed back 🐴🚀",
+        "Neigh-nomics 101: Buy, Hodl, Pray 🙏💰"
       ];
-      return replies[Math.floor(Math.random() * replies.length)];
+      return chaos[Math.floor(Math.random() * chaos.length)];
     }
 
-    function appendMessage(sender, message) {
-      const msg = document.createElement("div");
-      msg.className = sender;
-      msg.textContent = `${sender.toUpperCase()}: ${message}`;
-      chatBox.appendChild(msg);
-      chatBox.scrollTop = chatBox.scrollHeight;
-    }
+    return replies[Math.floor(Math.random() * replies.length)];
+  }
 
-    function sendMessage() {
-      const userMsg = input.value.trim();
-      if (!userMsg) return;
-      appendMessage("user", userMsg);
-      input.value = "";
-      setTimeout(() => appendMessage("horse", generateHorseReply(userMsg)), 800);
-    }
+  function sendMessage() {
+    const userMsg = input.value.trim();
+    if (!userMsg) return;
+    appendMessage("user", userMsg);
+    input.value = "";
+    setTimeout(() => appendMessage("horse", generateHorseReply(userMsg)), 800);
+  }
 
-    sendBtn.addEventListener("click", sendMessage);
-    input.addEventListener("keypress", (e) => {
-      if (e.key === "Enter") sendMessage();
-    });
+  sendBtn.addEventListener("click", sendMessage);
+  input.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") sendMessage();
+  });
 
-    function copyCA() {
-      navigator.clipboard.writeText("E5UdugdLvgsccqe3pdq1ivNBTZhaxwthjvnE85Kzpump");
-      alert("Contract copied to clipboard 🐴");
-    }
+  function copyCA() {
+    navigator.clipboard.writeText("E5UdugdLvgsccqe3pdq1ivNBTZhaxwthjvnE85Kzpump");
+    alert("Contract copied to clipboard 🐴");
+  }
+</script>
+
   </script>
 </body>
 </html>

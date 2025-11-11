@@ -40,11 +40,6 @@
       text-shadow: 0 0 15px #FFD700;
     }
 
-    h3 {
-      color: #ccc;
-      margin-bottom: 30px;
-    }
-
     #chatBox {
       width: 80%;
       max-width: 600px;
@@ -54,9 +49,11 @@
       padding: 20px;
       box-shadow: 0 0 25px rgba(255,255,255,0.08);
       text-align: left;
+      overflow-y: auto;
+      height: 400px;
     }
 
-    .vent {
+    .horse {
       color: #FFD700;
       margin-bottom: 8px;
     }
@@ -103,7 +100,7 @@
 </head>
 <body>
   <nav>
-    <a href="/">🐴 Vent AI</a>
+    <a href="/">🐴 Horse AI</a>
     <a href="/meme.html">🎨 Meme Generator</a>
   </nav>
 
@@ -111,9 +108,9 @@
   <h3>$HORSE</h3>
 
   <section id="chatSection">
-    <h2>💬 Talk to Vent</h2>
+    <h2>💬 Talk to Horse</h2>
     <div id="chatBox"></div>
-    <input type="text" id="userInput" placeholder="Say something to Vent... (Press Enter)">
+    <input type="text" id="userInput" placeholder="Say something to Horse... (Press Enter)">
     <button onclick="sendMessage()">Send</button>
   </section>
 
@@ -121,6 +118,45 @@
     <p>Built by the degens, for the degens 🐴</p>
   </footer>
 
-  <script src="horse.js"></script>
+  <script>
+    const chatBox = document.getElementById('chatBox');
+    const input = document.getElementById('userInput');
+
+    function appendMessage(sender, text) {
+      const msg = document.createElement('div');
+      msg.classList.add(sender);
+      msg.innerHTML = `<b>${sender === 'horse' ? 'Horse' : 'You'}:</b> ${text}`;
+      chatBox.appendChild(msg);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    async function sendMessage() {
+      const userText = input.value.trim();
+      if (!userText) return;
+
+      appendMessage('user', userText);
+      input.value = '';
+
+      appendMessage('horse', 'Typing... 🐴');
+
+      try {
+        const response = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: userText })
+        });
+        const data = await response.json();
+        chatBox.lastChild.remove();
+        appendMessage('horse', data.reply || "Neigh... Horse’s vent might be clogged. 💨");
+      } catch (err) {
+        chatBox.lastChild.remove();
+        appendMessage('horse', "Bruh, Horse fell through the vent. Try again later 💀");
+      }
+    }
+
+    input.addEventListener('keypress', e => {
+      if (e.key === 'Enter') sendMessage();
+    });
+  </script>
 </body>
 </html>

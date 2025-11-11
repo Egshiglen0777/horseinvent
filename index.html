@@ -1,203 +1,191 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🐴 Horse in an Air Vent — $HORSE</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
-  <style>
+<style>
+  body {
+    margin: 0;
+    background: url('https://raw.githubusercontent.com/Egshiglen0777/horseinvent/main/hqdefault.jpg') center/cover no-repeat fixed;
+    font-family: 'Bungee', cursive;
+    color: #fff;
+    text-align: center;
+    overflow-x: hidden;
+  }
+
+  nav {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 15px 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  }
+
+  nav a {
+    color: #fff;
+    margin: 5px 15px;
+    text-decoration: none;
+    font-size: 18px;
+    transition: 0.3s;
+  }
+
+  nav a:hover {
+    color: #FFD700;
+  }
+
+  h1 {
+    font-size: 2.3rem;
+    color: #FFD700;
+    text-shadow: 0 0 15px #FFD700;
+    margin-top: 40px;
+    padding: 0 10px;
+  }
+
+  h3 {
+    color: #FFD700;
+    text-shadow: 0 0 10px #FFD700;
+    margin-bottom: 10px;
+  }
+
+  #chatBox {
+    width: 90%;
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 15px;
+    border-radius: 15px;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+    height: 400px;
+    overflow-y: auto;
+    text-align: left;
+    box-shadow: 0 0 25px rgba(0,0,0,0.4);
+  }
+
+  .horse {
+    color: #FFD700;
+    margin-bottom: 8px;
+    font-size: 1rem;
+  }
+
+  .user {
+    color: #00BFFF;
+    margin-bottom: 8px;
+    font-size: 1rem;
+  }
+
+  #userInput {
+    width: 65%;
+    padding: 10px;
+    border: none;
+    border-bottom: 2px solid #FFD700;
+    background: transparent;
+    color: white;
+    font-family: 'Bungee', cursive;
+    outline: none;
+  }
+
+  button {
+    padding: 10px 18px;
+    margin-left: 10px;
+    background: #FFD700;
+    color: #111;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-family: 'Bungee', cursive;
+  }
+
+  button:hover {
+    background: #ffea70;
+  }
+
+  .links {
+    margin-top: 40px;
+    text-align: center;
+  }
+
+  .links a {
+    color: #FFD700;
+    text-decoration: none;
+    margin: 0 10px;
+    display: inline-block;
+    transition: 0.3s;
+    font-size: 1rem;
+  }
+
+  .links a:hover {
+    color: white;
+  }
+
+  .ca {
+    margin-top: 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    color: #FFD700;
+    word-break: break-all;
+  }
+
+  footer {
+    margin-top: 40px;
+    color: #ddd;
+    font-size: 0.8rem;
+    background: rgba(0,0,0,0.6);
+    padding: 10px 0;
+  }
+
+  /* 📱 Responsive mobile layout */
+  @media (max-width: 768px) {
     body {
-      margin: 0;
-      background: url('https://raw.githubusercontent.com/Egshiglen0777/horseinvent/main/hqdefault.jpg') center/cover no-repeat fixed;
-      font-family: 'Bungee', cursive;
-      color: #fff;
-      text-align: center;
-    }
-
-    nav {
-      background: rgba(0, 0, 0, 0.6);
-      padding: 15px 0;
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    }
-
-    nav a {
-      color: #fff;
-      margin: 0 15px;
-      text-decoration: none;
-      font-size: 18px;
-      transition: 0.3s;
-    }
-
-    nav a:hover {
-      color: #FFD700;
+      background-attachment: scroll;
     }
 
     h1 {
-      font-size: 2.8rem;
-      color: #FFD700;
-      text-shadow: 0 0 15px #FFD700;
-      margin-top: 40px;
-    }
-
-    h3 {
-      color: #FFD700;
-      text-shadow: 0 0 10px #FFD700;
+      font-size: 1.8rem;
+      margin-top: 30px;
     }
 
     #chatBox {
-      width: 80%;
-      max-width: 600px;
-      margin: 40px auto;
-      padding: 20px;
-      border-radius: 15px;
-      background: rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(8px);
-      height: 400px;
-      overflow-y: auto;
-      text-align: left;
-      box-shadow: 0 0 25px rgba(0,0,0,0.4);
+      width: 95%;
+      height: 300px;
+      font-size: 0.9rem;
     }
 
-    .horse {
-      color: #FFD700;
-      margin-bottom: 8px;
-    }
-
-    .user {
-      color: #00BFFF;
-      margin-bottom: 8px;
-    }
-
-    input {
-      width: 70%;
-      padding: 10px;
-      border: none;
-      border-bottom: 2px solid #FFD700;
-      background: transparent;
-      color: white;
-      font-family: 'Bungee', cursive;
-      outline: none;
+    #userInput {
+      width: 55%;
+      font-size: 0.9rem;
     }
 
     button {
-      padding: 10px 18px;
-      margin-left: 10px;
-      background: #FFD700;
-      color: #111;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: 0.3s;
-      font-family: 'Bungee', cursive;
+      padding: 8px 14px;
+      margin-left: 5px;
+      font-size: 0.9rem;
     }
 
-    button:hover {
-      background: #ffea70;
+    nav a {
+      font-size: 16px;
     }
 
     .links {
-      margin-top: 40px;
-      text-align: center;
-    }
-
-    .links a {
-      color: #FFD700;
-      text-decoration: none;
-      margin: 0 15px;
-      transition: 0.3s;
-    }
-
-    .links a:hover {
-      color: white;
-    }
-
-    .ca {
-      margin-top: 20px;
-      font-size: 1rem;
-      cursor: pointer;
-      color: #FFD700;
+      font-size: 0.9rem;
+      padding: 0 10px;
     }
 
     footer {
-      margin-top: 40px;
-      color: #ddd;
+      font-size: 0.7rem;
+      padding: 8px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    #chatBox {
+      height: 250px;
+    }
+
+    #userInput {
+      width: 70%;
       font-size: 0.8rem;
-      background: rgba(0,0,0,0.6);
-      padding: 10px 0;
-    }
-  </style>
-</head>
-<body>
-  <nav>
-    <a href="/">🐴 Horse AI</a>
-    <a href="/meme.html">🎨 Meme Generator</a>
-  </nav>
-
-  <h1>🐴 Horse in an Air Vent</h1>
-  <h3>$HORSE</h3>
-
-  <section id="chatSection">
-    <h2>💬 Talk to Horse</h2>
-    <div id="chatBox"></div>
-    <input type="text" id="userInput" placeholder="Say something to Horse... (Press Enter)">
-    <button onclick="sendMessage()">Send</button>
-  </section>
-
-  <div class="links">
-    <a href="https://x.com/i/communities/1986269796942684308" target="_blank">🐦 X Community</a> |
-    <a href="https://dexscreener.com/solana/aunwse6wj6goanxka1gdgdwzjpdfxburqigrfntqhuhc" target="_blank">📊 DexScreener</a> |
-    <a href="https://pump.fun/coin/E5UdugdLvgsccqe3pdq1ivNBTZhaxwthjvnE85Kzpump" target="_blank">💥 Pump.fun</a>
-    <div class="ca" onclick="copyCA()">📋 CA: E5UdugdLvgsccqe3pdq1ivNBTZhaxwthjvnE85Kzpump</div>
-  </div>
-
-  <footer>
-    Built by the degens, for the degens 🐴💨
-  </footer>
-
-  <script>
-    const chatBox = document.getElementById('chatBox');
-    const input = document.getElementById('userInput');
-
-    function appendMessage(sender, text) {
-      const msg = document.createElement('div');
-      msg.classList.add(sender);
-      msg.innerHTML = `<b>${sender === 'horse' ? 'Horse' : 'You'}:</b> ${text}`;
-      chatBox.appendChild(msg);
-      chatBox.scrollTop = chatBox.scrollHeight;
     }
 
-    async function sendMessage() {
-      const userText = input.value.trim();
-      if (!userText) return;
-
-      appendMessage('user', userText);
-      input.value = '';
-
-      appendMessage('horse', 'Typing... 🐴💨');
-
-      try {
-        const response = await fetch('/api/chat', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: userText })
-        });
-        const data = await response.json();
-        chatBox.lastChild.remove();
-        appendMessage('horse', data.reply || "Bruh, Horse fell deeper in the vent 💀");
-      } catch (err) {
-        chatBox.lastChild.remove();
-        appendMessage('horse', "Network rug. Try again later 🧱🐴");
-      }
+    button {
+      padding: 6px 12px;
+      font-size: 0.8rem;
     }
-
-    input.addEventListener('keypress', e => {
-      if (e.key === 'Enter') sendMessage();
-    });
-
-    function copyCA() {
-      navigator.clipboard.writeText('E5UdugdLvgsccqe3pdq1ivNBTZhaxwthjvnE85Kzpump');
-      alert('Copied Contract Address ✅');
-    }
-  </script>
-</body>
-</html>
+  }
+</style>

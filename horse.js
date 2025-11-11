@@ -4,18 +4,35 @@ const router = express.Router();
 router.post("/chat", (req, res) => {
   const { message } = req.body;
   const lower = message.toLowerCase();
-  let reply = "Neigh... Horse’s still in the vent, hooman.";
+  let reply = "";
 
-  if (lower.includes("hello") || lower.includes("hi")) {
-    reply = "Yo, it’s Horse 🐴 still in the vent but vibin’. What brings you to my digital stable?";
-  } else if (lower.includes("price") || lower.includes("$horse")) {
-    reply = "📈 $HORSE chart lookin’ like a gallop to Valhalla, don’t fight the neigh-trend.";
-  } else if (lower.includes("who") || lower.includes("what")) {
-    reply = "I’m Horse, the meme-core AI stuck in an air vent. Built to neigh wisdom and talk degen. 💨";
-  } else if (lower.includes("word")) {
-    reply = "Word of the day? 'Neighconomics' — when markets go up for no reason and horses get rich. 🐎💰";
-  } else {
-    reply = "Still in the vent, hooman. Try askin’ somethin’ juicier 🐴💨";
+  if (lower.includes("hello") || lower.includes("hi") || lower.includes("yo")) {
+    reply = "Yo hooman. Horse here. Still stuck in the vent but vibin’. You buy $HORSE yet or just horsin’ around? 🐴💨";
+  } 
+  else if (lower.includes("price") || lower.includes("$horse") || lower.includes("chart")) {
+    reply = "📈 $HORSE chart? Straight gallop to Valhalla bro. Don’t fade the neigh. 🏇";
+  } 
+  else if (lower.includes("buy")) {
+    reply = "Finally a smart hooman. Click the link, ape in, and HODL me like your sanity depends on it 💰🐴";
+  } 
+  else if (lower.includes("love")) {
+    reply = "I only love liquidity, hooman. And carrots. Mostly carrots. 🥕💀";
+  } 
+  else if (lower.includes("advice")) {
+    reply = "Advice? Buy $HORSE, hold $HORSE, become $HORSE. Easy math. 🧠";
+  } 
+  else if (lower.includes("where")) {
+    reply = "Still in the air vent. Don’t ask how. Ask why. 🐴💨";
+  } 
+  else {
+    const replies = [
+      "Neigh... your vibes are bearish, hooman. Try again.",
+      "Bruh, are you rugging this convo?",
+      "Horse too busy watching the pump chart rn 🐴📈",
+      "Bro… it smells like fear and underbought positions in here.",
+      "Say ‘buy $HORSE’ three times and maybe I’ll answer properly 🧠"
+    ];
+    reply = replies[Math.floor(Math.random() * replies.length)];
   }
 
   res.json({ reply });

@@ -3,76 +3,127 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🐴 Horse Meme Generator</title>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+  <title>🎨 Horse Meme Generator — $HORSE</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
   <style>
-    body { background: #0b0b0b; color: #fff; font-family: 'Anton', sans-serif; text-align: center; margin: 0; }
-    .container { padding: 20px; }
-    canvas { background: #222; border-radius: 10px; margin: 20px auto; display: block; border: 2px solid #333; }
-    button { background: #2a2a2a; color: white; border: none; border-radius: 8px; margin: 5px; padding: 10px 16px; font-size: 14px; cursor: pointer; transition: 0.3s; }
-    button:hover { background: #3b3b3b; }
+    body {
+      background: radial-gradient(circle at top, #111, #000);
+      color: #fff;
+      font-family: 'Bungee', cursive;
+      text-align: center;
+      padding: 20px;
+      margin: 0;
+    }
+
+    nav {
+      background: #151515;
+      padding: 15px 0;
+      box-shadow: 0 4px 10px rgba(255, 255, 255, 0.05);
+    }
+
+    nav a {
+      color: #fff;
+      margin: 0 15px;
+      text-decoration: none;
+      font-size: 18px;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #FFD700;
+    }
+
+    h1 {
+      color: #FFD700;
+      text-shadow: 0 0 12px #FFD700;
+    }
+
+    canvas {
+      border-radius: 10px;
+      margin: 20px auto;
+      display: block;
+      border: 3px solid #FFD700;
+      box-shadow: 0 0 20px rgba(255,215,0,0.5);
+    }
+
+    button {
+      background: #FFD700;
+      color: #111;
+      border: none;
+      border-radius: 8px;
+      margin: 5px;
+      padding: 10px 16px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-family: 'Bungee', cursive;
+    }
+
+    button:hover {
+      background: #ffea70;
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h2>🎨 Horse Meme Generator</h2>
-    <canvas id="memeCanvas" width="640" height="480"></canvas>
-    <div>
-      <button id="addGlasses">Add Glasses</button>
-      <button id="addHat">Add Hat</button>
-      <button id="addCigarette">Add Cigarette</button>
-      <button id="addCrown">Add Crown</button>
-      <button id="download">Download Meme</button>
-    </div>
+  <nav>
+    <a href="/">🐴 Vent AI</a>
+    <a href="/meme.html">🎨 Meme Generator</a>
+  </nav>
+
+  <h1>🎨 Horse Meme Generator — $HORSE</h1>
+  <canvas id="memeCanvas" width="640" height="480"></canvas>
+
+  <div>
+    <button id="addGlasses">Add Glasses</button>
+    <button id="addHat">Add Hat</button>
+    <button id="addCigarette">Add Cigarette</button>
+    <button id="addCrown">Add Crown</button>
+    <button id="download">Download Meme</button>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/fabric@4.6.0/dist/fabric.min.js"></script>
   <script>
-    window.addEventListener('DOMContentLoaded', () => {
-      const canvas = new fabric.Canvas('memeCanvas', { preserveObjectStacking: true });
-      const horseUrl = 'https://raw.githubusercontent.com/Egshiglen0777/horseinvent/main/hqdefault.jpg';
+    const canvas = new fabric.Canvas('memeCanvas', { preserveObjectStacking: true });
 
-      fabric.Image.fromURL(horseUrl, function(horse) {
-        horse.scaleToWidth(480);
-        horse.set({ left: 80, top: 60, selectable: false });
-        canvas.add(horse);
-        canvas.sendToBack(horse);
-      }, { crossOrigin: 'anonymous' });
+    // 🐴 Use your GitHub-hosted image
+    const horseImage = 'https://raw.githubusercontent.com/Egshiglen0777/horseinvent/main/hqdefault.jpg';
+    fabric.Image.fromURL(horseImage, img => {
+      img.scaleToWidth(640);
+      canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
+    }, { crossOrigin: 'anonymous' });
 
-      const stickers = {
-        glasses: 'https://upload.wikimedia.org/wikipedia/commons/3/34/Deal_with_it_glasses.png',
-        hat: 'https://upload.wikimedia.org/wikipedia/commons/3/3a/Cowboy_hat_icon.png',
-        cigarette: 'https://upload.wikimedia.org/wikipedia/commons/2/2d/Cigarette_icon.png',
-        crown: 'https://upload.wikimedia.org/wikipedia/commons/d/d1/Gold_crown_icon.png'
-      };
+    const stickers = {
+      glasses: 'https://upload.wikimedia.org/wikipedia/commons/3/34/Deal_with_it_glasses.png',
+      hat: 'https://upload.wikimedia.org/wikipedia/commons/3/3a/Cowboy_hat_icon.png',
+      cigarette: 'https://upload.wikimedia.org/wikipedia/commons/2/2d/Cigarette_icon.png',
+      crown: 'https://upload.wikimedia.org/wikipedia/commons/d/d1/Gold_crown_icon.png'
+    };
 
-      function addSticker(url) {
-        fabric.Image.fromURL(url, function(img) {
-          img.scaleToWidth(120);
-          img.set({
-            left: canvas.width / 2 - 60,
-            top: canvas.height / 2 - 60,
-            cornerStyle: 'circle',
-            borderColor: '#00aaff',
-            cornerColor: '#00ffff'
-          });
-          canvas.add(img);
-          canvas.setActiveObject(img);
-        }, { crossOrigin: 'anonymous' });
-      }
+    function addSticker(url) {
+      fabric.Image.fromURL(url, img => {
+        img.scaleToWidth(120);
+        img.set({
+          left: canvas.width / 2 - 60,
+          top: canvas.height / 2 - 60,
+          cornerStyle: 'circle',
+          borderColor: '#FFD700',
+          cornerColor: '#FFF'
+        });
+        canvas.add(img);
+        canvas.setActiveObject(img);
+      });
+    }
 
-      document.getElementById('addGlasses').onclick = () => addSticker(stickers.glasses);
-      document.getElementById('addHat').onclick = () => addSticker(stickers.hat);
-      document.getElementById('addCigarette').onclick = () => addSticker(stickers.cigarette);
-      document.getElementById('addCrown').onclick = () => addSticker(stickers.crown);
-
-      document.getElementById('download').onclick = () => {
-        const link = document.createElement('a');
-        link.download = 'horse-meme.png';
-        link.href = canvas.toDataURL('image/png');
-        link.click();
-      };
-    });
+    document.getElementById('addGlasses').onclick = () => addSticker(stickers.glasses);
+    document.getElementById('addHat').onclick = () => addSticker(stickers.hat);
+    document.getElementById('addCigarette').onclick = () => addSticker(stickers.cigarette);
+    document.getElementById('addCrown').onclick = () => addSticker(stickers.crown);
+    document.getElementById('download').onclick = () => {
+      const link = document.createElement('a');
+      link.download = 'horse-meme.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    };
   </script>
 </body>
 </html>

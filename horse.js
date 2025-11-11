@@ -1,39 +1,39 @@
-import express from "express";
-import dotenv from "dotenv";
-import OpenAI from "openai";
+const chatBox = document.getElementById('chatBox');
+const input = document.getElementById('userInput');
 
-dotenv.config();
-const router = express.Router();
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+function appendMessage(sender, text) {
+  const msg = document.createElement('div');
+  msg.classList.add(sender);
+  msg.innerHTML = `<b>${sender === 'vent' ? 'Vent' : 'You'}:</b> ${text}`;
+  chatBox.appendChild(msg);
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
 
-router.post("/chat", async (req, res) => {
+async function sendMessage() {
+  const userText = input.value.trim();
+  if (!userText) return;
+
+  appendMessage('user', userText);
+  input.value = '';
+
+  appendMessage('vent', 'Typing... 🐴');
+
   try {
-    const userMsg = req.body.message || "Hello";
-    const completion = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
-      messages: [
-        {
-          role: "system",
-          content: `
-You are "Vent" — a meme-tic, sarcastic, and self-aware AI horse who lives inside a website called "HorseInvent".
-You constantly remind the user that you're "still in vent" (your catchphrase).
-You speak like an online meme lord mixed with a surprisingly wise horse philosopher.
-You make fun of humans, talk in short witty lines, sometimes adding emojis like 🐴💀🤖💨.
-You often drop one-liners about life, tech, and oats.
-You respond as if chatting casually on the internet — funny, chaotic, but sharp.
-Never sound robotic. Never apologize. Always stay in character as Vent.
-          `
-        },
-        { role: "user", content: userMsg }
-      ]
+    const response = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: userText })
     });
-
-    const reply = completion.choices[0].message.content;
-    res.json({ reply });
+    const data = await response.json();
+    chatBox.lastChild.remove();
+    appendMessage('vent', data.reply || "Neigh... I think my vent’s clogged. 🐴💨");
   } catch (err) {
-    console.error(err);
-    res.json({ reply: "💀 neigh... my brain fell out of the vent again." });
+    chatBox.lastChild.remove();
+    appendMessage('vent', "Bruh, even vents have downtime. Try again. 💀");
   }
-});
+}
 
-export default router;
+// ✅ Press Enter to send
+input.addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') sendMessage();
+});
